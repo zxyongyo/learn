@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="app">		
+		<!-- v-bind绑定属性  可以简写为 : -->
+		<!-- <h1 v-bind:title="title+'!'">hello world</h1> -->
+		<!-- <h1 :title="title+'!'">hello world</h1> -->
+		
+		<!-- v-model:双向数据绑定 -->
+		<!-- <input type="text" v-model:value="value">
+		<div>{{ value }}</div>
+		<textarea v-model="content"></textarea>
+		{{ content }} <br> -->
+		<!-- <input type="checkbox" v-model="checked">
+		{{ checked }} -->
+		<!-- <input type="radio" value="js" v-model="picked">js
+		<input type="radio" value="vue" v-model="picked">vue
+		{{ picked }} -->
+		<select v-model='selected'>
+			<option selected disabled>--请选择--</option>
+			<option value="html">html</option>
+			<option value="js">js</option>
+			<option value="vue">vue</option>
+		</select>
+		{{selected}}
+
+	</div>
+
+
+	<script type="text/javascript">
+		new Vue({
+			el: "#app",
+			data: {
+				value: 'this is value',
+				content: "this is content",
+				checked : true,
+				picked: '',
+				selected: ''
+			}
+		})
+	</script>
+</body>
+</html>

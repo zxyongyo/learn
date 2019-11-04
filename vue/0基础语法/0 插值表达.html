@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="root">		<!-- vue实例的挂载点 -->
+		{{msg}}
+	</div>
+
+
+	<script type="text/javascript">
+		// new Vue({
+		// 	el: "#root",	//指定挂载点
+		// 	// template: "<h1>{{msg}}</h1>",
+		// 	data: {
+		// 		msg: "Hello world!",
+		// 		num: 123,
+		// 		name: "zxy",
+		// 		content: "<h1>hello</h1>"
+		// 	}
+		// })
+		const a = new Vue({
+			el: "#root",	//指定挂载点
+			// template: "<h1>{{msg}}</h1>",
+			data: {
+				msg: "Hello world!"
+			}
+		})
+		// a.$mount('#root')	==  el: '#root'
+		// console.log(a.msg);	//Hello world!
+		a.msg=100;
+		console.log(a.$el.innerHTML)	//异步的 	Hello world! 
+		a.$nextTick(()=>{	//页面最后一次更新后执行
+			console.log(a.$el.innerHTML)	//100
+		})
+	</script>
+</body>
+</html>

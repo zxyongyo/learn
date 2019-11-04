@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+        <my-content v-bind='info' @add="handleAdd"></my-content>
+        <p>父组件的num: {{ info.number }}</p>
+	</div>
+
+     <!-- props: ['title', 'content'],    组件中要用的值 必须用props注册 
+        注册可以用type对值进行校验  default设置默认值  require规定是否必须接收到值
+        当data是一个对象有多个值时  可以用v-bind一次全部传递
+        
+    -->
+	<script type="text/javascript">
+		const vm = new Vue({
+            el: '#app',
+            data: {
+                info: {
+                    title: 'hello',
+                    content: 'Vue! I like a fool.',
+                    number: 0
+                }
+            },
+            methods: {
+                handleAdd (num){
+                    this.info.number += num;
+                }
+            },
+            
+            components: {   //定义局部组件
+                myContent: {   
+                    
+                    props: {    
+                        title: {
+                            type: String,
+                            default: 'Hi'   
+                        },
+                        content: {
+                            type: String,
+                            require: true
+                        },
+                        number: {
+                            type: Number
+                        } 
+                    },
+                    template: `
+                    <div>
+                        <h2>{{ title }}</h2>
+                        <p>{{ content }}</p>
+                        <P>子组件的num:{{ number }}</P>
+                        <button @click="handleClick">add</button>
+                    </div>
+                    `,
+                    methods: {
+                        handleClick (){
+                            this.$emit('add', 1)   //第一个参数是被监听的事件 剩下的都是值
+                        }
+                    }
+                }    
+            }
+        })
+	</script>
+</body>
+</html>

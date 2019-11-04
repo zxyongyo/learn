@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="vue.js"></script>
+    <style>
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: green;
+        }
+        .yellow{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- v-bind: 绑定属性 可以简写为 : 
+    class 绑定多个class时  要写成数组形式 :class=[class1, class2]
+    写为对象形式  可以设置该class是否生效 :class=[{red: true}, {width: false}]
+    style 绑定style 样式要写成对象形式 绑定多个可以写成数组
+    v-on: 绑定事件  可以简写为 @
+    -->
+
+    <div id="app">
+        <!-- <img v-bind:src="imgUrl" :alt="name" :style="{width: imgWidth, border: '1px solid'}">     -->
+        <!-- <h4 :class='[class1, class2]'>{{ name }}</h4> -->
+        <!-- <h4 :class='[{red: true}, {width: false}]'>{{ name }}</h4> -->
+
+        <button v-on:click="handleClick">dd</button>
+        <h4 :class="h4ClassArr[h4Index]">{{name}}</h4>
+    </div>
+    <script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'hello',
+            imgUrl: 'http://pic33.nipic.com/20131007/13639685_123501617185_2.jpg',
+            class1: 'red',
+            class2: 'width',
+            imgWidth: '200px',
+            h4ClassArr: ['red', 'green', 'yellow'],
+            h4Index: 0,
+            h4Count: 0
+        },
+        methods: {
+            handleClick(e){
+                console.log(e.target)
+                this.h4Index = ++ this.h4Count%3;
+                console.log(this.h4Count+'%3='+this.h4Index)
+            }
+        }
+    })
+    </script>
+</body>
+</html>

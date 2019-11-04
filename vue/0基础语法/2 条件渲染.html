@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+	<style>
+		.red{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+		}
+		.blue{
+			width: 100px;
+			height: 100px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="root">
+		<!-- v-if false时删除dom -->
+		<!-- v-show	false时display:none -->
+		<!-- <template> 可以控制里边的dom  自己不添加进dom -->
+		<!-- v-for='((item, index) in arr)' -->
+		<!-- v-for='((value, key, index) in obj)' -->
+		<!-- 循环尽量绑定 :key 可以判断dom是否可以复用 节省性能 key值必须是唯一的 -->
+		<!-- 不能通过索引或改长度的方法更改数组，这样页面不会重新渲染 可以用操作数组的方法-->
+		<!-- 向对象内添加或删除属性 页面不会渲染 可以用vue提供的$set方法 -->
+		<!-- Object.definedProperty -->
+			<!-- <div v-if="show">hello Vue</div> -->
+
+		<div v-show="show">Hello Vue</div>
+		<button @click="click">{{msg}}</button>
+		<!-- <div class="red" v-if='show'></div>
+		<div class="blue" v-else></div> -->
+
+		<template v-if='show'>
+			<div class="red"></div>
+			<div class="blue"></div>
+		</template>
+
+		<ul>
+			<!-- <li v-for="item of list">{{item}}</li> -->
+			<li v-for="(item, index) of list" :key="index">{{item}} {{index}}</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el: "#root",
+			data: {
+				msg: '隐藏',
+				show: true,
+				list: ['a','b','c','d','e']
+			},
+			methods: {
+				click: function (){
+					this.show = !this.show;
+					this.msg = this.show ? '隐藏' : '显示';
+				}
+			}
+		})
+	</script>
+</body>
+</html>
