@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#canvas{
+			display: block;
+			margin: 0 auto;
+			border: 1px solid;
+		}
+	</style>
+</head>
+<body>
+
+
+	<canvas id="canvas"></canvas>
+	
+
+	<script type="text/javascript">
+		window.onload = function (){
+			
+			var canvas = document.getElementById('canvas');
+			canvas.width = 1024;
+			canvas.height = 768;
+			
+			var context = canvas.getContext('2d');
+			
+			context.lineWidth = 5
+			context.strokeStyle = 'red'
+			context.arc(300, 300, 200, 0, 2*Math.PI)
+			context.stroke()
+
+			for(var i = 0; i<10; i++){
+				context.beginPath()
+				context.arc(50 + i*100, 300, 40, 0, 2*Math.PI*(i+1)/10)
+				context.fillStyle = 'blue'
+				context.fill()
+			}
+		}
+		
+	</script>
+</body>
+</html>
