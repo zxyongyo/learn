@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+		/*
+		Javascript 是面向对象的，每个实例对象都有一个__proto_属性，该属性指向它原型对象，
+		这个实例对象的构造函数有一个原型属性 prototype，与实例的__proto__属性指向同一个对象。
+		当一个对象在查找一个属性的时，自身没有就会根据__proto__ 向它的原型进行查找，
+		如果都没有，则向它的原型的原型继续查找，直到查到Object.prototype._proto_为 null，这样也就形成了原型链。
+		*/
+		// 原型链
+		// Ground.prototype.lastName = 'zhang'
+		// function Ground(){
+
+		// }
+		// var ground = new Ground();
+
+		// Father.prototype = ground;
+		// function Father(){
+		// 	this.name = 'zxy';
+		// }
+		// var father = new Father();
+
+		// Son.prototype = father;
+		// function Son(){
+		// 	this.hobbit = 'smoke';
+		// }
+		// var son = new Son();
+		// console.log(son.hobbit)	//smoke
+		// console.log(son.name)	//zxy
+		// console.log(son.lastName)	//zhang
+
+
+
+		// function Box() {}							//声明一个构造函数
+
+		// Box.prototype.name = 'Lee';					//在原型里添加属性
+		// Box.prototype.age = 100;					
+		// Box.prototype.run = function () {				//在原型里添加方法
+		// 	return this.name + this.age + '运行中...';
+		// };
+		// var box = new Box();
+		// var box1 = new Box();
+		// var box2 = new Box();
+		// // console.log(box1.run == box2.run);	//true
+		// // console.log(box1.__proto__)
+		// // console.log(Box.prototype.isPrototypeOf(box1))	//判断一个对象是否指向了该构造函数的原型对象
+		// // console.log(box1.hasOwnProperty('name'))		//实例里有name属性返回true，否则返回false
+		// function isProperty(object, property) {			//判断原型中是否存在属性
+		// 	return !object.hasOwnProperty(property) && (property in object);
+		// }
+		// console.log(isProperty(box,'name'))
+
+
+
+		//call改变this指向	call改变this指向		call改变this指向
+		//call改变this指向	call改变this指向		call改变this指向
+		//call改变this指向	call改变this指向		call改变this指向
+		// function Person(name,age){
+		// 	// call之后 this == obj
+		// 	this.name = name;
+		// 	this.age = age;
+		// }
+		// // var p1 = new Person('lee',100);
+		// var obj = {};
+		// Person.call(obj,'jack',20)
+
+		function Person(name,age,sex){
+			this.name = name;
+			this.age = age;
+			this.sex = sex
+		}
+		function Student(name,age,sex,tel,grade){
+			// this.name = name;
+			// this.age = age;
+			// this.sex = sex;
+			Person.call(this,name,age,sex)
+			// Person.apply(this,[name,age,sex])
+			this.tel = tel;
+			this.grade = grade;
+		}
+
+
+	</script>
+</body>
+</html>

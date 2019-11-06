@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+    //使用递归的方式实现数组、对象的深拷贝
+    function deepClone1(obj) {
+        //判断要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
+        var objClone = Array.isArray(obj) ? [] : {};
+        //进行深拷贝的不能为空，并且是对象
+        if (obj && typeof obj === 'object') {
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if (obj[key] && typeof obj[key] === 'object') {
+                        objClone[key] = deepClone1(obj[key]);
+                    } else {
+                        objClone[key] = obj[key];
+                    }
+                }
+            }
+        }
+        return objClone;
+    }
+
+
+    var obj = {
+        name: 'zhang',
+        sex: 'male',
+        son: {
+            big: 'wang',
+            little: 'ming'
+        }
+    }
+
+    var newObj = deepClone1(obj)
+    newObj.son.little = 'lee';
+
+    console.log(obj.son.little) //ming
+    console.log(newObj.son.little) //lee
+
+
+    //通过js的内置对象json来进行数组对象的深拷贝
+    /*无法实现对象中方法的深拷贝*/
+    // function deepClone2(obj){
+    // 	var _obj = JSON.stringify(obj),
+    // 	objClone = JSON.parse(_obj);
+    // 	return objClone;
+    // }
+
+    // 通过jQuery的extend方法实现深拷贝
+    // var arr = [1,'a',3];
+    // var newArr = $.extend(true,[],arr);
+    // alert(arr == newArr)
+    </script>
+</body>
+
+</html>

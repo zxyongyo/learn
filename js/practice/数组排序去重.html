@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//数组排序	冒泡排序
+		// var array = [1,4,-8,-3,6,12,9,8];
+		// function sort(arr){
+		// 	for(var j=0;j<arr.length-1;j++){
+		// 	//两两比较，如果前一个比后一个大，则交换位置。
+		// 		for(var i=0; i<arr.length-1-j; i++){
+		// 			if(arr[i]>arr[i+1]){
+		// 				var temp = arr[i];
+		// 				arr[i] = arr[i+1];
+		// 				arr[i+1] = temp;
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// // alert(array.indexOf(8))
+		// sort(array);
+		// document.write(array);
+
+		//快速排序
+		// function quickSort(arr){  
+	 //        if(arr.length<=1){//如果数组只有一个数，就直接返回；  
+	 //            return arr;  
+	 //        }  
+	 //        var num=Math.floor(arr.length/2);//找到中间数的索引值，如果是浮点数，则向下取整  
+	 //        var newValue=arr.splice(num,1);//找到中间数的值  
+	 //        var left=[],right=[];  
+	 //        for(var i=0;i<arr.length;i++){  
+	 //            if(arr[i]<newValue){  
+	 //                left.push(arr[i]);//基准点的左边的数传到左边数组  
+	 //            }else{  
+	 //                right.push(arr[i]);//基准点的右边的数传到右边数组  
+	 //            }  
+	 //        }  
+	 //        return quickSort(left).concat(newValue,quickSort(right));//递归不断重复比较  
+	 //    }  
+	 //    console.log(quickSort([31,4,5,52,1,8])); 
+
+	 
+
+		// js自带sort函数
+		// var array = [1,4,-8,-3,6,12,9,8];
+		// function compare(v1,v2){
+		// 	// if(v1>v2){
+		// 	// 	return 1
+		// 	// }else if(v1<v2){
+		// 	// 	return -1
+		// 	// }else{
+		// 	// 	return 0
+		// 	// }
+		// 	return v1-v2
+		// }
+		// array.sort(compare)
+		// console.log(array)
+
+
+		// //数组去重
+		// var arr=[2,8,5,0,5,2,6,7,2];
+		// function unique(arr){
+		// 	var hash=[];
+		// 	for (var i = 0; i < arr.length; i++) {
+			
+		// 	if(hash.indexOf(arr[i])==-1){
+		// 		hash.push(arr[i]);
+		// 	}
+		// 	}
+		// 	return hash;
+		// }
+		
+		// alert(unique(arr))
+
+	</script>
+</body>
+</html>

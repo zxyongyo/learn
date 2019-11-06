@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	//构造函数原理
+	function Person(name,age){
+		//var this = {}
+		this.name = name;
+		this.age = age;
+		this.say = function (){
+			console.log(this.name+this.age);
+		}
+		// return this
+	}
+	var p1 = new Person('lee',18);
+
+	// Car.prototype	原型
+	// Car.prototype = {}	是祖先
+	// Car.prototype = {
+	// 	height : 1400,
+	// 	lang : 4900,
+	// 	name : 'BMw'
+	// }
+	// function Car(){}
+	// var car = new Car();
+
+	// 工厂模式
+	// function factory(name,age){
+	// 	var obj = new Object()
+	// 	obj.name = name;
+	// 	obj.age = age;
+	// 	obj.run = function (){
+	// 		return this.name+':'+this.age;
+	// 	}
+	// 	return obj;
+	// }
+	// var f1 = factory('lee',13);
+	// var f2 = factory('mic',32);
+	// console.log(f1.run())
+	// console.log(f2.run())
+
+	// 构造函数
+	// function Box(name,age){
+	// 	this.name = name;
+	// 	this.age = age;
+	// 	this.run = function (){
+	// 		return this.name+':'+this.age;
+	// 	}
+	// }
+	// var box1 = new Box('lee',23)
+	// var box2 = new Box('mar',22)
+	// console.log(box1.run())
+	// console.log(box2.run())
+	// // console.log(typeof box1)
+	// // console.log(box1 instanceof Box)
+	// var obj = new Object();
+	// Box.call(obj,'jack',43)
+	// console.log(obj.run())
+</script>
+</body>
+</html>
