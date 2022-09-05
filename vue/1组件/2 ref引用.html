@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script type="text/javascript" src="vue.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+	<div id="app">
+        <change-color ref='cmp'></change-color>
+        <button @click='handleClick'>0.0</button>
+	</div>
+
+	<!--
+        dom上设置ref属性 可以在vue实例中 可以用$refs引用dom元素
+        如果设置多个相同的ref 后面会覆盖前面 用v-for生成的不会覆盖 
+        组件上设置ref属性 可以引用该组件的实例对象
+     -->
+	
+
+	<script type="text/javascript">
+
+		const vm = new Vue({
+			el: "#app",
+            data: {
+                        
+            },
+            methods: {
+                handleClick (){
+                    console.log(this.$refs)
+                }
+            },
+            components: {
+                changeColor: {
+                    data (){
+                        return {
+                            arr:['red', 'green', 'yellow', 'blue']
+                        }
+                    },
+                    template: `
+                        <div>
+                            <button 
+                            v-for="color in arr"
+                            :key="color"
+                            :style="{backgroundColor: color }"
+                            @click="handleClick(color)"
+                            :data-color='color'
+                            >{{ color }}</button>  
+                            <div ref="box" class='box'></div>  
+                        </div>
+                    `,
+                    methods: {
+                        handleClick (color){
+                            console.log(this)
+                            console.log(this.$refs)
+
+                            var box = this.$refs.box;
+                            box.style.backgroundColor = color;
+                            // var color = e.target.dataset.color
+                            console.log(color)
+                        }
+                    }
+                }
+            }
+		})
+	</script>
+</body>
+</html>

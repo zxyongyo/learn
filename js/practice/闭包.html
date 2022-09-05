@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+	<script>
+		
+		// function test(){
+		// 	var num = 100;
+		// 	function a(){
+		// 		num++;
+		// 		console.log(num);
+		// 	}
+		// 	function b(){
+		// 		num--;
+		// 		console.log(num);			
+		// 	}
+		// 	return [a,b];
+		// }
+		// var aaa = test();
+		// aaa[0]();
+		// aaa[0]();
+		// aaa[0]();
+		// aaa[0]();
+		// aaa[0]();
+		// aaa[1]();
+		// aaa[1]();
+		// aaa[1]();
+		// aaa[1]();
+		// aaa[1]();
+
+
+		// function test(){
+		// 	var arr = []
+		// 	for(var i = 0; i<10; i++){
+		// 		arr[i] = function (){
+		// 			document.write(i+' ')
+		// 		}
+		// 	}
+		// 	return arr		//arr与test形成闭包  可以使用test的执行期上下文
+		// }
+
+		// var myArr = test()
+		// for(var j=0; j<10; j++){
+		// 	myArr[j]()			
+		// }			//打印出10个10		
+		function test(){
+			var arr = []
+			for(var i = 0; i<10; i++){
+				(function (j){
+					arr[j] = function (){
+						document.write(j + ' ')
+					}
+				}(i))
+			}
+			return arr		//arr与test形成闭包  可以使用test的执行期上下文
+		}
+
+		var myArr = test()
+		for(var j=0; j<10; j++){
+			myArr[j]()			
+		}
+
+		//百度面试题
+		// var f = (
+		// 	function f(){
+		// 		return "1"
+		// 	},
+		// 	function g(){
+		// 		return 2
+		// 	}
+		// )();
+		// alert(typeof f)
+		// var x = 1
+		// if(function f(){}){
+		// 	x += typeof f;
+		// }
+		// console.log(x)
+
+		// alert(typeof ooo)		//typeof 不会报错
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script type="text/javascript">
+		// JSON
+		// var obj = {
+		// 	"name":"zhang",
+		// 	"age":18
+		// }
+		// console.log(JSON.stringify(obj))
+		// console.log(JSON.parse(obj))
+
+
+		// 异步加载
+		function loadScript(url, callback){
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			if(script.readyState){		//IE
+				script.onreadystatechange = function(){
+					if(script.readyState == "complete" || script.readyState == "loaded"){
+						callback();
+					}
+				}
+			}else{
+				script.onload = function (){
+					callback();
+				}
+			}
+			script.src = url;
+			document.head.appendChild(script);
+
+		}
+		loadScript('demo.js',function (){
+			test();
+		})
+
+
+		console.log(document.readyState)
+		window.onload = function (){
+			console.log(document.readyState)
+		}
+		document.onreadystatechange = function(){
+			console.log(document.readyState)
+		}
+	</script>
+</body>
+</html>

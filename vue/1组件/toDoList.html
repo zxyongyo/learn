@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<input type="text" v-model="inputValue">
+			<button @click='handle'>提交</button>
+		</div>
+		<ul>
+			<li v-for="(item, index) of list" :key="index">
+				{{item}}
+			</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el: "#root",
+			data: {
+				inputValue: '',
+				list: []
+			},
+			methods: {
+				handle: function(){
+					if(this.inputValue != '')
+						this.list.push(this.inputValue);
+					this.inputValue = '';
+				}
+			}
+		})
+	</script>
+</body>
+</html>

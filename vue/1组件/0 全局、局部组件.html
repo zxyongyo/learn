@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<input type="text" v-model="inputValue">
+			<button @click='handle'>提交</button>
+		</div>
+		<ul>
+			<!-- <li v-for="(item, index) of list" :key="index">
+				{{item}}
+			</li> -->
+			<todo-item 
+				v-for="(item, index) of list" 
+				:key="index"
+				:content="item"
+				:index="index"
+				@delete='handleDelete'
+			>
+			</todo-item>	
+		</ul>
+	</div>
+
+	<!-- Vue.component('name',{})	定义全局组件
+	组件中的 data必须是个函数
+	在vue的实例中用components定义局部组件 -->
+	
+
+	<script type="text/javascript">
+		Vue.component('todoItem', {		//定义全局组件	也是一个Vue的实例
+			props: ['content','index'],		//接收content
+			template: '<li @click="handleClick">{{content}} {{index}}</li>',
+			methods: {
+				handleClick: function(){
+					this.$emit('delete',this.index)
+				}
+			}
+		})
+
+		// var todoItem = {		//定义局部组件  需要用components在实例中注册
+		// 	template: '<li>item</li>'
+		// }
+
+		new Vue({
+			el: "#root",
+			// components: {
+			// 	'todo-item': todoItem
+			// },
+			data: {
+				inputValue: '',
+				list: []
+			},
+			methods: {
+				handle: function(){
+					if(this.inputValue != '')
+						this.list.push(this.inputValue);
+					this.inputValue = '';
+				},
+				handleDelete:function(index){
+					this.list.splice(index,1);		//在list中 从下标为index的元素删除1项
+				}
+			}
+		})
+	</script>
+</body>
+</html>

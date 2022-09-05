@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var num = 0
+		function getTotal(n) {
+			if(n <= 1){
+				return 1
+			}else{
+				num = n*getTotal(n-1)
+				return num
+			}
+		}
+		alert(getTotal(5))
+	</script>
+	
+</body>
+</html>
