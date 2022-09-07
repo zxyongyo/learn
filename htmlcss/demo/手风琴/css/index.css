@@ -1,0 +1,38 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #dfe6e9;
+}
+.wrapper{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 900px;
+  height: 300px;
+  /* flex默认超出不换行 */
+  display: flex;
+  overflow: hidden;
+}
+.wrapper > div{
+  /* 设置图片宽度超出隐藏
+    所有item 会被flex容器等分所占宽度
+    当一个item被hover时 设置其flex-shrink为0，
+    该item将被图片撑开 其他item等分剩余宽度
+   */
+  overflow: hidden;
+  transition: all .7s;
+}
+.wrapper > div:hover{
+  /* flex-grow: flex item 放大的比例，默认为0 即存在剩余空间也不放大
+    flex-shrink 缩小的比例，当容器空间不足则等比缩小，默认为1 即如果空间不足 将缩小
+    flex-basis 在分配多余空间之前，项目占据的主轴空间 默认为auto即项目本来大小*/
+  flex: none; /* flex-grow: 0;flex-shrink:0;flex-basis: auto; */
+}
+.wrapper > div > img{
+  width: 400px;
+}

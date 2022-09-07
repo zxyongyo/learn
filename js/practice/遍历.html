@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iterator</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // console.log(Array.prototype)
+    // js 数组遍历方法
+
+    {
+      /* 
+        forEach 可以接收两个参数 （callback，thisArg）（回调函数, 回调函数中this的值） *如果使用箭头函数，thisArg参数会被忽略*
+        callback可以接收三个参数 （当前元素，当前元素的索引，当前数组）
+        在forEach执行过程中，除抛出异常外，没有办法终止或跳出循环
+      */
+      let arr = ['z', 'x', 'y', 'o', 'n', 'g']
+      // console.table(arr)
+      arr.forEach(function (element, index, array) {
+        // console.log(element)  // z x o n g
+        if (element === 'x') {
+          this.shift()
+        }
+      }, arr)
+    }
+
+    {
+      /* 
+        map方法和forEach类似，接收一个回调函数作为参数，将数组所有成员一次传入函数，
+          然后把每次的执行结果组成一个新数组返回，*如果不是为了使用返回值，就不要用map*
+      */
+      let arr = ['z', 'x', 'y', 'o', 'n', 'g']
+      const newArr = arr.map(function (value, index, array) {
+        return value.charCodeAt(0)
+      }, arr)
+      // console.log(newArr)
+    }
+
+    {
+      /*
+        filter方法用来过滤数组，返回满足条件成员组成的一个新数组
+      */
+      let arr = ['z', 'x', 'y', 'o', 'n', 'g']
+      // const newArr = arr.filter(function (value, index, array) {
+      //   if (value.charCodeAt(0) >= 120) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      //   return value.charCodeAt(0) >= 120
+      // }, arr)
+      const newArr = arr.filter(item => item.charCodeAt(0) >= 120)
+      // console.log(newArr)
+    }
+
+    {
+      /*
+        some、every方法功能和用法都相似，返回一个布尔值，表示数组成员是否符合某种条件
+          some 当有一个数组成员符合条件就返回true
+          every 当全部数组成员符合条件才返回true，否则返回false
+        *对于空数组 some返回false，every返回true，回调函数都不会执行*
+      */
+      let arr = ['z', 'x', 'y', 'o', 'n', 'g']
+      const someRes = arr.some(function (value, index, array) {
+        return value.charCodeAt(0) > 120  // 只要有一个charcode大于120就返回true
+      }, arr)
+      const everyRes = arr.every(function (value, index, array) {
+        return value.charCodeAt(0) > 120  // charcode大于120才返回true
+      }, arr)
+      // console.log(someRes, everyRes)
+    }
+
+    {
+      /*
+       reduce()，reduceRight() 依次处理数组中每个成员，最终累计为一个值，reduce从左到右，reduceRight从右到左
+       接收两个参数  回调函数，第一个参数的默认值
+       回调函数接收四个参数 前两个参数时必须的，后两个参数是可选的
+       1. 上一次执行返回的累积值，默认为数组的第一个成员
+       2. 当前变量，[如果没有指定参数1的默认值]默认为数组的第二个成员
+       3. 当前位置，默认0
+       4. 原数组
+       *如果数组为空，没有指定第一个参数的默认值，将抛出异常，如果指定了第一个参数的默认值，callback不会执行，该参数会被直接返回*
+      */
+      let arr = ['z', 'x', 'y', 'o', 'n', 'g']
+      const reduceRes = arr.reduce(function (previousValue, currentValue, currentIndex, array) {
+        // console.log(previousValue, currentValue)
+        return previousValue + currentValue
+      }, 'i am ')
+      const max = arr.reduce((a, b) => a > b ? a : b) // 找出数组中最大值
+      // console.log(max)
+    }
+
+    {
+      /*
+        find 返回数组中满足提供的测试函数的第一个元素的值 否则返回 undefined
+      */
+    }
+
+    // 对象遍历
+    {
+      /*
+        for in
+      */
+      const obj = {
+        id: 10000001,
+        name: 'zxyong',
+        age: 18,
+        gender: 'male'
+      }
+      for (k in obj) {
+        // console.log(k, obj[k])
+      }
+    }
+
+    {
+      /*
+        Object.keys(obj)  // 返回一个由该对象所有key组成的数组
+        Object.values(obj)  // 返回一个由该对象所有value组成的数组
+      */
+      const obj = {
+        id: 10000001,
+        name: 'zxyong',
+        age: 18,
+        gender: 'male'
+      }
+      Object.keys(obj).forEach(function (key) {
+        // console.log(key,this[key])
+      }, obj)
+    }
+  </script>
+</body>
+
+</html>

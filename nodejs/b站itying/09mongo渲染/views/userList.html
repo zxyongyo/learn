@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户列表</title>
+</head>
+<body>
+  <table border="1">
+    <thead>用户列表</thead>
+    <tr><td>用户名</td><td>密码</td><td>操作</td></tr>
+    <% user.forEach( item => {%>
+      <tr>
+        <td><%=item.username%></td>
+        <td><%=item.password%></td>
+        <td><a href="/doDelete?username=<%=item.username%>">删除</a></td>
+      </tr>
+    <%})%>
+  </table>
+</body>
+</html>

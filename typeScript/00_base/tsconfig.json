@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    // 使用的模块版本
+    "module": "commonjs",
+    // 编译为的js版本
+    "target": "es2016",
+    "jsx": "preserve",
+    "strictFunctionTypes": true,
+    "sourceMap": true,
+    // 编译后的js文件存放位置
+    "outDir": "./target",
+    // 将全局作用域中的ts文件编译合并到一个js文件中
+    // "outFile": "./target/app.js",
+    // 是否编译js文件，默认是false 不编译
+    "allowJs": false,
+    // 是否检查js文件
+    "checkJs": false,
+    // 编译时候是否移除注释
+    "removeComments": false,
+    // 当ts文件有错误时 不编译为js文件
+    "noEmitOnError": false,
+    // 控制所有的严格检查
+    "strict": false,
+    // 编译后文件是否使用严格模式
+    "alwaysStrict": false,
+    // 不允许隐式的any
+    "noImplicitAny": false
+  },
+  // 不编译的目录文件
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}

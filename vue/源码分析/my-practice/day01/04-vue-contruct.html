@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <p>{{ name }}</p>
+    <p>{{ message }}</p>
+  </div>
+
+  <script>
+    function compiler(tmp, data){
+      let r = /\{\{(.+?)\}\}/g  // 匹配 {{}} 的正则
+      let childNodes = tmp.childNodes // 获取模板的子元素
+      for(let i = 0; i < childNodes.length; i++){
+        let nodeType = childNodes[i].nodeType //1 - 元素    3-文本
+        if (nodeType === 3) {
+          let txt = childNodes[i].nodeValue  // 获取文本的value
+          // replace每使用正则匹配一次 函数就执行一次 函数第一个参数：匹配到的内容，函数第n个参数：正则匹配到的第n组
+          txt = txt.replace(r, function (_, g) {
+            let key = g.trim()
+            return data[key]
+          })
+          childNodes[i].nodeValue = txt
+        } else if (nodeType === 1) {
+          compiler(childNodes[i], data) // 如果是元素递归
+        }
+      }
+    }
+
+    class MyVue {
+
+      constructor(options) {
+        // 内部变量用 _ 开头  只读变量用 $ 开头
+        this._el = options.el
+        this._data = options.data
+        // 模板
+        this._templateDom = document.querySelector(this._el)
+        // 父元素
+        this._parent = this._templateDom.parentNode
+        this.render()
+      }
+
+      /** 将模板结合数据，得到html加到页面中 */
+      render() {
+        this.compiler()
+      }
+      /** 编译 将模板与数据结合 得到真正的DOM元素 */
+      compiler() {
+        let realHTMLDOM = this._templateDom.cloneNode(true)  // 拷贝模板
+        compiler(realHTMLDOM, this._data)
+        this.update(realHTMLDOM)
+      }
+      /** 将DOM元素 放到页面中 */
+      update(realHTMLDOM) {
+        this._parent.replaceChild(realHTMLDOM, document.querySelector(this._el))
+      }
+    }
+
+    let app = new MyVue({
+      el: '#root',
+      data: {
+        name: 'zxyong',
+        message: 'hello'
+      }
+    })
+  </script>
+</body>
+</html>
