@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9-表单</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      
+      class MyForm extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {
+            inputValue: '',
+            textareaValue: '',
+            selectValue: ''
+          }
+
+          this.handleSubmit = this.handleSubmit.bind(this)
+          this.handleInputChange = this.handleInputChange.bind(this)
+          this.handleTextareaChange = this.handleTextareaChange.bind(this)
+          this.handleSelectChange = this.handleSelectChange.bind(this)
+        }
+
+        handleSubmit(e) {
+          console.log(this.state)
+          e.preventDefault()
+        }
+
+        handleInputChange(e) {
+          this.setState({
+            inputValue: e.target.value
+          })
+        }
+
+        handleTextareaChange(e) {
+          this.setState({
+            textareaValue: e.target.value
+          })
+        }
+
+        handleSelectChange(e) {
+          this.setState({
+            selectValue: e.target.value
+          })
+        }
+
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                姓名:
+                <input type="text" value={this.state.inputValue} onChange={this.handleInputChange} />
+              </label>
+              <p />
+              <label>
+                文章:
+                <textarea value={this.state.textareaValue} onChange={this.handleTextareaChange} />
+              </label>
+              <p />
+              <label>
+                选择你喜欢的风味:
+                <select value={this.state.selectValue} onChange={this.handleSelectChange}>
+                  <option value="grapefruit">葡萄柚</option>
+                  <option value="lime">酸橙</option>
+                  <option value="coconut">椰子</option>
+                  <option value="mango">芒果</option>
+                </select>
+              </label>
+              <p />
+              <input type="submit" value="submit" />
+            </form>
+          )
+        }
+      }
+
+      root.render(<MyForm />)
+    </script>
+  </body>
+</html>

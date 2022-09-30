@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">导出excel</button>
+
+  <script>
+    const btn = document.getElementById('btn')
+    const data = [
+      {id: '001', name: 'zxy', age: 16, grend: '1'},
+      {id: '001', name: 'zxy', age: 16, grend: '1'},
+      {id: '000asdsad5464648949401', name: 'zxy', age: 16, grend: '1'},
+      {id: '001', name: 'zxy', age: 16, grend: '1'}
+    ]
+
+    btn.addEventListener('click', e => {
+      const a = document.createElement('a')
+      const res = data
+        .map(v => Object.values(v).join('\t'))
+        .join('\n')
+      a.href = URL.createObjectURL(new Blob([res]))
+      a.download = 'test.xls'
+      a.click()
+      a.remove()
+    })
+  </script>
+</body>
+</html>
