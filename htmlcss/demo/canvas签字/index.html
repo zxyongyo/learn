@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas签字</title>
+  <style>
+    body{
+      margin: 0;
+    }
+
+    .container{
+      margin: 0 auto;
+      width: 1200px;
+    }
+    .container .main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      width: 600px;
+    }
+    .settings{
+      margin-top: 80px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      font-size: 16px;
+    }
+    .settings > div{
+      margin-right: 20px;
+    }
+    canvas{
+      margin-top: 10px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 1px solid #aaa;
+    }
+
+    .btn-group{
+      margin-top: 30px;
+      width: 100%;
+    }
+    .btn-group button{
+      margin-right: 20px;
+      padding: 5px 16px;
+      background: unset;
+      border: 1px solid #777;
+      outline: unset;
+      cursor: pointer;
+    }
+
+    .preview{
+      margin-top: 30px;
+      border: 1px solid #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="main">
+      <div class="settings">
+        <div>
+          <label for="range">线条粗细</label>
+          <input id="range" type="range" min="1" max="100" value="2" oninput="setLineWidth(this)" >
+          <span>2</span>
+        </div>
+        <div>
+          <label for="color">线条颜色</label>
+          <input id="color" type="color" value="#333333" onchange="setLineColor(this)" >
+        </div>
+      </div>
+
+      <canvas></canvas>
+
+      <div class="btn-group">
+        <button class="btn" onclick="handleClear()">清空</button>
+        <button class="btn" onclick="reverse()">撤销</button>
+        <button class="btn" onclick="preview()">预览</button>
+        <button class="btn" onclick="save()">保存</button>
+      </div>
+
+      <img class="preview"></img>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.querySelector('canvas')
+    const canvasRect = canvas.getBoundingClientRect()
+    canvas.width = canvasRect.width
+    canvas.height = canvasRect.height
+    const ctx = canvas.getContext('2d')
+
+    let isDrawing = false, // 正在绘制
+      startX,
+      endX,
+      startY,
+      endY
+
+    let lineWidth = 2,
+      lineColor = '#333',
+      historySteps = []
+    
+    canvas.addEventListener('mousedown', e => {
+      isDrawing = true
+      startX = e.clientX - canvasRect.left
+      startY = e.clientY - canvasRect.top
+
+      endX = startX
+      endY = startY
+
+      draw()
+    })
+
+    canvas.addEventListener('mousemove', e => {
+      if (!isDrawing) { return }
+      endX = e.clientX - canvasRect.left
+      endY = e.clientY - canvasRect.top
+
+      draw()
+
+      startX = endX
+      startY = endY
+    })
+
+    canvas.addEventListener('mouseup', e => {
+      endX = e.clientX - canvasRect.left
+      endY = e.clientY - canvasRect.top
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      historySteps.push(imageData)
+    })
+
+    document.addEventListener('mouseup', e => {
+      isDrawing = false
+    })
+
+    const draw = () => {
+      ctx.beginPath()
+      ctx.moveTo(startX, startY)
+      ctx.lineTo(endX, endY)
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      ctx.lineWidth = lineWidth
+      ctx.strokeStyle = lineColor
+      ctx.stroke()
+      ctx.closePath()
+    }
+
+    // 设置线条宽度
+    const setLineWidth = (el) => {
+      lineWidth = el.value
+      el.parentNode.querySelector('span').innerText = lineWidth
+    }
+
+    // 设置线条颜色
+    const setLineColor = (el) => {
+      lineColor = el.value
+    }
+
+    // 清空
+    const handleClear = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+    }
+
+    // 撤销
+    const reverse = () => {
+      historySteps.pop()
+      const len = historySteps.length
+      if (len) { 
+        ctx.putImageData(historySteps[len - 1], 0, 0)
+      } else {
+        handleClear()
+      }
+    }
+
+    // 预览
+    const preview = () => {
+      const base64 = canvas.toDataURL('image/png')
+      const img = document.querySelector('.preview')
+      img.src = base64
+      img.width = canvas.width
+      img.height = canvas.height
+  }
+
+    // 保存
+    const save = () => {
+      const a = document.createElement('a')
+      a.download = 'image'
+      a.href = canvas.toDataURL('image/png')
+      a.dispatchEvent(new MouseEvent('click'))
+    }
+
+  </script>
+</body>
+</html>

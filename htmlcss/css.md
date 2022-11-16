@@ -7,6 +7,7 @@
 
 - `grid-template-columns` - 指定每一列的列宽
 - `grid-template-rows` - 指定每一行的行高
+- `grid-template` - 以上两个属性的简写
 - 
 - `row-gap` - 设置行与行的间隔（行间距）
 - `column-gap` - 设置列与列的间隔（列间距）
