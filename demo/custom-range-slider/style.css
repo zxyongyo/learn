@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  overflow: hidden;
+  user-select: none;
+}
+
+h2 {
+  position: absolute;
+  top: 10px;
+}
+
+.range-container {
+  position: relative;
+}
+
+.range {
+  margin: 18px 0;
+  width: 300px;
+  appearance: none;
+}
+.range + label{
+  position: absolute;
+  top: -25px;
+  left: 110px;
+  padding: 5px 0;
+  width: 80px;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  text-align: center;
+}
+
+/* Chrome & Safari */
+.range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: purple;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-thumb {
+  margin-top: -7px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 1px solid purple;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Firefox */
+.range::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: purple;
+  cursor: pointer;
+}
+
+.range::-moz-range-thumb {
+  margin-top: -7px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 1px solid purple;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* IE */
+.range::-ms-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: purple;
+  cursor: pointer;
+}
+
+.range::-ms-thumb {
+  margin-top: -7px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 1px solid purple;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas签字</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="main">
+      <div class="settings">
+        <div>
+          <label for="range">线条粗细</label>
+          <input id="range" type="range" min="1" max="100" value="2" oninput="setLineWidth(this)" >
+          <span>2</span>
+        </div>
+        <div>
+          <label for="color">线条颜色</label>
+          <input id="color" type="color" value="#333333" onchange="setLineColor(this)" >
+        </div>
+      </div>
+
+      <canvas></canvas>
+
+      <div class="btn-group">
+        <button class="btn" onclick="handleClear()">清空</button>
+        <button class="btn" onclick="reverse()">撤销</button>
+        <button class="btn" onclick="preview()">预览</button>
+        <button class="btn" onclick="save()">保存</button>
+      </div>
+
+      <img class="preview"></img>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
