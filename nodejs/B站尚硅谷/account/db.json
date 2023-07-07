@@ -1,0 +1,20 @@
+{
+  "accounts": [
+    {
+      "title": "test income",
+      "time": "2023-06-07",
+      "type": "1",
+      "account": "10",
+      "remarks": "this is a remark",
+      "id": "1686044460823"
+    },
+    {
+      "title": "purchase",
+      "time": "2023-06-24",
+      "type": "-1",
+      "account": "8000",
+      "remarks": "buy a iphone 14",
+      "id": "1686044605767"
+    }
+  ]
+}

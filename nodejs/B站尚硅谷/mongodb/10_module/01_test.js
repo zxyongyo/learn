@@ -1,0 +1,15 @@
+const db = require('./db/db.js')
+const BookModel = require('./models/BookModel.js')
+const Mongoose = require('mongoose')
+
+db()
+  .then(() => {
+    BookModel.find()
+      .select({ name: 1, price: 1 })
+      .sort({ price: -1 })
+      .skip(10)
+      .limit(10)
+      .then(console.log, console.log)
+      .finally(Mongoose.disconnect)
+  })
+  .catch(console.log)

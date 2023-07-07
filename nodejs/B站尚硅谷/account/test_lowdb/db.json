@@ -1,0 +1,20 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "content": "a content",
+      "time": 1686042727283
+    },
+    {
+      "id": 2,
+      "content": "a content",
+      "time": 1686042731994
+    },
+    {
+      "id": 3,
+      "content": "a content",
+      "time": 1686042737540
+    }
+  ],
+  "user": []
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <style>
+      label {
+        font-weight: normal;
+      }
+      .panel-body .glyphicon-remove {
+        display: none;
+      }
+      .panel-body:hover .glyphicon-remove {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <div class="row">
+            <h2 class="col-xs-6">记账本</h2>
+            <h2 class="col-xs-6 text-right"><a class="btn btn-primary" href="/create">新增</a></h2>
+          </div>
+          
+          <hr />
+          <div class="accounts">
+            <% accounts.forEach(item=> {%>
+            <div
+              class="panel <%= item.type == '1' ? 'panel-success' : 'panel-danger' %>"
+            >
+              <div class="panel-heading"><%= new Date(item.time).toLocaleDateString().replaceAll('/', '-') %></div>
+              <div class="panel-body">
+                <div class="col-xs-6"><%= item.title %></div>
+                <div class="col-xs-2 text-center">
+                  <% if (item.type == '1') { %>
+                  <span class="label label-success">收入</span>
+                  <% } else { %>
+                  <span class="label label-warning">支出</span>
+                  <% } %>
+                </div>
+                <div class="col-xs-2 text-right"><%= item.account %> 元</div>
+                <div class="col-xs-2 text-right">
+                  <span
+                    class="glyphicon glyphicon-remove"
+                    aria-hidden="true"
+                    data-id="<%= item._id %>"
+                    onclick="handleClick(this.dataset.id)"
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function handleClick(id) {
+        if (window.confirm('确认删除？')) {
+          $.ajax({
+            url: `/accounts/${id}`,
+            method: 'delete',
+            success: (res) =>  {
+              window.location.reload()
+            },
+            error(err) {
+              alert('Operation failed! Please try again.')
+              console.log(err)
+            }
+          })
+        }
+      }
+    </script>
+  </body>
+</html>
